@@ -18,7 +18,7 @@ public class UserResoucer {
 	@GetMapping
 	public ResponseEntity<User> findAll(){ 
 		// tipo especifico do spring para retornar respostas de requisições web
-		User u = new User(1L, "thiago", "thiago@gmail.com", "81928739","1234");
+		User u = new User(null, "thiago", "thiago@gmail.com", "81928739","1234");
 		return ResponseEntity.ok().body(u);
 	}
 }
