@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -14,54 +16,63 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "tb_order")
-public class Order implements Serializable{
+public class Order implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long Id;
+	private Long id;
+
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T' HH:mm:ss'Z'", timezone = "GMT")
 	private Instant moment; // Registrar um "Instant", melhor que o "Date";
-	
+
 	@ManyToOne
 	// Comandos JPA / Transformar em uma chave estrangeira
-	@JoinColumn(name = "client_id")// Informar o nome da chave estrangeira do banco de dados
-	private User client ;
-	
+	@JoinColumn(name = "client_id") // Informar o nome da chave estrangeira do banco de dados
+	private User client;
+
 	// Construtores
 	public Order() {
-		
+
 	}
+
 	public Order(Long id, Instant moment, User client) {
- 		Id = id;
+		id = id;
 		this.moment = moment;
 		this.client = client;
 	}
-	
+
 	// Getter e Setters
 	public Long getId() {
-		return Id;
+		return id;
 	}
+
 	public void setId(Long id) {
-		Id = id;
+		id = id;
 	}
+
 	public Instant getMoment() {
 		return moment;
 	}
+
 	public void setMoment(Instant moment) {
 		this.moment = moment;
 	}
+
 	public User getClient() {
 		return client;
 	}
+
 	public void setClient(User client) {
 		this.client = client;
 	}
-	
+
 	// Hashcode e Equals
 	@Override
 	public int hashCode() {
-		return Objects.hash(Id);
+		return Objects.hash(id);
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -71,7 +82,7 @@ public class Order implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Order other = (Order) obj;
-		return Objects.equals(Id, other.Id);
+		return Objects.equals(id, other.id);
 	}
-	
+
 }

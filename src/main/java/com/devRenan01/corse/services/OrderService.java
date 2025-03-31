@@ -6,23 +6,23 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.devRenan01.corse.entities.User;
-import com.devRenan01.corse.repositories.UserRepository;
+import com.devRenan01.corse.entities.Order;
+import com.devRenan01.corse.repositories.OrderRepository;
 
 @Service 
-public class UserService {
+public class OrderService {
 	// Operação para buscar o usuário pelo Id;
 	
 	@Autowired
-	private UserRepository repository;
+	private OrderRepository repository;
 	
 	// Operação para buscar todos os uários do banco de dados
-	public List<User> findAll(){
+	public List<Order> findAll(){
 		return repository.findAll();
 	}
 	
-	public User finfById(Long id) {
-		Optional<User> obj = repository.findById(id);
+	public Order finfById(Long id) {
+		Optional<Order> obj = repository.findById(id);
 		return obj.get();
 	}
 	
