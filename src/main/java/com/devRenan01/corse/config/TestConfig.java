@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Profile;
 
 import com.devRenan01.corse.entities.Order;
 import com.devRenan01.corse.entities.User;
+import com.devRenan01.corse.entities.enums.OrderStatus;
 import com.devRenan01.corse.repositories.OrderRepository;
 import com.devRenan01.corse.repositories.UserRepository;
 
@@ -38,9 +39,9 @@ public class TestConfig implements CommandLineRunner {
 		User u1 = new User(null, "Renan", "renan@gmail.com", "911111111", "12345");	
 		User u2 = new User(null, "Souza", "souza@gmail.com", "922222222", "12345");	
 		
-		Order o1 = new Order(null, Instant.parse("2025-03-27T14:03:54Z"), u1);
-		Order o2 = new Order(null, Instant.parse("2025-04-28T14:05:44Z"), u2);
-		Order o3 = new Order(null, Instant.parse("2025-04-29T14:03:21Z"), u1);
+		Order o1 = new Order(null, Instant.parse("2025-03-27T14:03:54Z"),OrderStatus.PAID , u1);
+		Order o2 = new Order(null, Instant.parse("2025-04-28T14:05:44Z"), OrderStatus.WAITING_PAYMENT, u2);
+		Order o3 = new Order(null, Instant.parse("2025-04-29T14:03:21Z"),OrderStatus.WAITING_PAYMENT , u1);
 
 		//salvar os obj no banco de dados.
 		userRepository.saveAll(Arrays.asList(u1, u2));
