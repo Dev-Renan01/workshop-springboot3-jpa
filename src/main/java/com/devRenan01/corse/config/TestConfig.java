@@ -8,9 +8,11 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
+import com.devRenan01.corse.entities.Category;
 import com.devRenan01.corse.entities.Order;
 import com.devRenan01.corse.entities.User;
 import com.devRenan01.corse.entities.enums.OrderStatus;
+import com.devRenan01.corse.repositories.CategoryRepository;
 import com.devRenan01.corse.repositories.OrderRepository;
 import com.devRenan01.corse.repositories.UserRepository;
 
@@ -32,10 +34,17 @@ public class TestConfig implements CommandLineRunner {
 	@Autowired
 	private OrderRepository orderRepository;
 	
+	@Autowired	
+	private CategoryRepository categoryRepository;
 	
 	@Override
 	public void run(String... args) throws Exception {
 		// Tudo que for colocado desse metodo será executado quando a aplicação for iniciada
+		Category cat1 = new Category(null, "Eletroncs");
+		Category cat2 = new Category(null, "Books");
+		Category cat3 = new Category(null, "Computer");
+		
+
 		User u1 = new User(null, "Renan", "renan@gmail.com", "911111111", "12345");	
 		User u2 = new User(null, "Souza", "souza@gmail.com", "922222222", "12345");	
 		
@@ -44,10 +53,13 @@ public class TestConfig implements CommandLineRunner {
 		Order o3 = new Order(null, Instant.parse("2025-04-29T14:03:21Z"),OrderStatus.WAITING_PAYMENT , u1);
 
 		//salvar os obj no banco de dados.
-		userRepository.saveAll(Arrays.asList(u1, u2));
 		//comando "saveAll" -> passa uma lista de obj e salva no banco de dados
-		orderRepository.saveAll(Arrays.asList(o1, o2, o3));
 
+		userRepository.saveAll(Arrays.asList(u1, u2));
+
+		orderRepository.saveAll(Arrays.asList(o1, o2, o3));
+		
+		categoryRepository.saveAll(Arrays.asList(cat1, cat2, cat3));
 	}
 	
 }
