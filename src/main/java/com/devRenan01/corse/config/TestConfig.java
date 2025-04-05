@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Profile;
 import com.devRenan01.corse.entities.Category;
 import com.devRenan01.corse.entities.Order;
 import com.devRenan01.corse.entities.OrderItem;
+import com.devRenan01.corse.entities.Payment;
 import com.devRenan01.corse.entities.Product;
 import com.devRenan01.corse.entities.User;
 import com.devRenan01.corse.entities.enums.OrderStatus;
@@ -46,6 +47,8 @@ public class TestConfig implements CommandLineRunner {
 	
 	@Autowired
 	private OrderItemRepository orderItemRepository; 
+	
+	
 	
 	@Override
 	public void run(String... args) throws Exception {
@@ -98,6 +101,10 @@ public class TestConfig implements CommandLineRunner {
 		
 		orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
 		
+		Payment pay1 = new Payment(null, Instant.parse("2025-03-27T07:03:54Z"), o1);
+		o1.setPayment(pay1);
+		
+		orderRepository.save(o1);
 	}
 	
 }
